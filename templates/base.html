@@ -109,26 +109,6 @@
 <wrap>
     <nav class="navbar">
         <a class="logo" href="#">동학개미</a>
-        <div class="col-lg-6">
-            <div class="input-group">
-                <input type="text" class="form-control" id="search-box" placeholder="종목명 또는 종목코드를 입력하세요">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="fas fa-search"></i></button>
-                </span>
-            </div>
-        </div>
-        {% if not user.is_authenticated %}
-            <ul class="acc">
-                <a href="/login">로그인</a>
-            </ul>
-        {% else %}
-            {{ user.name }} 님 반갑습니다!
-<!--        <ul class="acc">-->
-<!--            <li class="name">김개미</li>-->
-<!--            <li><i class="far fa-user-circle fa-2x"></i></li>-->
-<!--            <li class="acc-btn" type="button" onclick=""><i class="fas fa-ellipsis-v"></i></li>-->
-<!--        </ul>-->
-        {% endif %}
     </nav>
     <div class="lower">
         <div class="left">
