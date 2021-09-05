@@ -14,6 +14,11 @@ class NewsSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
+        page = response.url.split("/")[-2]
+        filename = f'quotes-{page}.html'
+        with open(filename, 'wb') as f:
+            f.write(response.body)
+        self.log(f'Saved file {filename}')
         # parse메서드는 이 웹사이트를 통해서 반환된 응답 중 어떤 데이터를 수집할지 정의하는 구간
         # response.css() 매서드나 response.xpath() 메서드를 통해 원하는 값을 가져올 수 있음.
         # 사이트.robot.txt 네이버에서 크롤링하지말라고 정책이되어있기 때문에 settings.py 에서 ROBOTSTxT_OBY
