@@ -6,7 +6,13 @@
 import scrapy
 
 
-class CrawlerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Url(scrapy.Item):
+    url = scrapy.Field()  # 기사링크
+    # last_updated = scrapy.Field(serializer=str)
+
+
+class Item(scrapy.Item):
+    date = scrapy.Field()  # 기사시간
+    title = scrapy.Field()  # 기사제목
+    article = scrapy.Field()  # 기사본문
+    # last_updated = scrapy.Field(serializer=str)
