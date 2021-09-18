@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load customfilter %}
+{% block content %}
+    <!-- 감성분석/AI분석 선택 버튼 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <div class = "row">
+        <div class = "col text-center" >
+            <button class = "btn btn-primary" style = "border-radius: 30px; ">감성분석</button>
+            <button type = "button" class="btn btn-primary" data-toggle = "popover"
+            title = "AI분석이란?" data-content = "AI분석이란 딥러닝, 머신러닝 등의 AI기술을 활용하여 분석하는 것을 말합니다.">
+                설명
+            </button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+      $( function () {
+        $( '[data-toggle="popover"]' ).popover({container:"body"});
+      } );
+    </script>
+    <style>
+    .btn-light{
+        background-color:rgba(250, 166, 176, 1);
+        border-radius:30px;
+    }
+    </style>
+
+    <!-- 종목 나열 -->
+    <div class = "row" style = "margin:20px">
+         <table class = 'table'>
+            <thead>
+                <tr class = "text-center">
+                    <th>종목명</th>
+                    <th>종목코드</th>
+                    <th>가격</th>
+                    <th>등락률</th>
+                    <th>상승/하락 예측</th>
+                    <th>확률</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!--종목 리스트 나열-->
+            {% for list in name|reportkey %}
+                <tr class = "text-center">
+                    <td><a href = "detail/{{ list.stock_id }}">{{ list.stock_name }}</a></td> <!-- 종목명 -->
+                    <td>{{ list.stock_code }}</td> <!-- 종목코드 -->
+                    <td>{{ list.close }}</td> <!-- 가격 -->
+                    <td>{{ list.close }}</td> <!-- 등락률 -->
+                    {% if list.result == 1 %}
+                        <td><button class = "btn btn-light">상승</button></td> <!-- 상승/하락 예측 -->
+                    {% elif list.result == 0 %}
+                        <td><button class="btn btn-primary" style = "border-radius: 30px; ">하락</button></td>
+                    {% endif %}
+                    <td>{{ list.accuracy }}</td> <!-- 확률 -->
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <div class = "row">
+        <ul class = "pagination justify-content-center">
+            <li class = "page-item"><a class = "page-link" href="#">1</a></li>
+            <li class = "page-item"><a class = "page-link" href="#">2</a></li>
+        </ul>
+    </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+{% endblock %}

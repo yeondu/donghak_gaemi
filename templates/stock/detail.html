@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load customfilter %}
+{% block content %}
+    <style>
+    .card{margin-right:20px;
+    float:left;}
+    .opinion{
+        background: #FAA6B0;
+        border-radius: 100px;
+        text-align:center;
+    }
+    .choice{
+background: rgba(34, 98, 198, 0.61);
+border-radius: 30px;
+        font-family: IBM Plex Sans;
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+line-height: 26px;
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: -0.02em;
+
+color: #FFFFFF;
+    }
+    </style>
+</div>
+    <div class = "container">
+        <div class = "row" style = "margin:20px">
+            <!-- 종목 정보 -->
+            <div class = "col">
+                <h3>{{ stock.stock_name }}</h3>
+                <span>{{ stock.stock_code }}</span>
+            </div>
+        </div>
+        <div class = "row" style = "margin:20px">
+            <!-- 감성분석 결과 -->
+            <h3>분석결과</h3>
+            <div class = "col">
+                <button class = "btn btn-primary" style = "border-radius: 30px;">감성분석</button>
+                <button class = "btn btn-light" style = "border-radius: 30px;">AI분석</button>
+            </div>
+        </div>
+
+        <div class = "row" style = "margin:20px">
+            <!-- 뉴스 카드 -->
+            <h3> 뉴스 </h3>
+            <div class = "row" style="margin:20px">
+                <div class = "col">
+                    <div class = "card" style = "border-radius: 30px;">
+                        <div class = "card-header" style = "text-align:center">
+                            {{ list.close }}
+                        </div>
+                        <div class = "card-body">
+                            <h7 class = "card-title">[독자컬럼] 주식중독, 당신의 뇌 고장낸다</h7>
+                            <p class = "opinion"> 긍정 </p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "col">
+                    <div class = "card" style = "border-radius: 30px;">
+                        <div class = "card-header" style = "text-align:center">
+                            토요경제
+                        </div>
+                        <div class = "card-body">
+                            <h7 class = "card-title">[독자컬럼] 주식중독, 당신의 뇌 고장낸다</h7>
+                            <p class = "opinion"> 긍정 </p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "col">
+                    <div class = "card" style = "border-radius: 30px;">
+                        <div class = "card-header" style = "text-align:center">
+                            토요경제
+                        </div>
+                        <div class = "card-body">
+                            <h7 class = "card-title">[독자컬럼] 주식중독, 당신의 뇌 고장낸다</h7>
+                            <p class = "opinion"> 긍정 </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "row" style = "margin:20px">
+                <div class = "col">
+                    <div class = "card" style = "border-radius: 30px;">
+                        <div class = "card-header" style = "text-align:center">
+                            토요경제
+                        </div>
+                        <div class = "card-body">
+                            <h7 class = "card-title">[독자컬럼] 주식중독, 당신의 뇌 고장낸다</h7>
+                            <p class = "opinion"> 긍정 </p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "col">
+                    <div class = "card" style = "border-radius: 30px;">
+                        <div class = "card-header" style = "text-align:center">
+                            토요경제
+                        </div>
+                        <div class = "card-body">
+                            <h7 class = "card-title">[독자컬럼] 주식중독, 당신의 뇌 고장낸다</h7>
+                            <p class = "opinion"> 긍정 </p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "col">
+                    <div class = "card" style = "border-radius: 30px;">
+                        <div class = "card-header" style = "text-align:center">
+                            토요경제
+                        </div>
+                        <div class = "card-body">
+                            <h7 class = "card-title">[독자컬럼] 주식중독, 당신의 뇌 고장낸다</h7>
+                            <p class = "opinion"> 긍정 </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
