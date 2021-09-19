@@ -3,12 +3,38 @@
 import scrapy
 from ..items import Item
 
-
+# url_request 코드 --> [ i종목의 j신문사 기사 크롤링 for j in 신문사 for i in 종목]
+# 어떻게 짜지....?
 class NewsSpider(scrapy.Spider):
     name = "news"
-    # 삼성전자 / 서울 경제
-    start_urls = [
-        "https://search.naver.com/search.naver?sm=tab_hty.top&where=news&query=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&oquery=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&tqi=hRk%2B6sp0JXossA4t7VossssstxZ-291757&nso=so%3Ar%2Cp%3Aall%2Ca%3Aall&mynews=1&news_office_checked=1011&office_section_code=3&office_type=1&pd=0&photo=0&sort=0"
+    # 최신순
+    # 종목 = ['NAVER',
+    #  '삼성전자',
+    #  '아모레퍼시픽',
+    #  '현대차',
+    #  'LG화학',
+    #  '카카오',
+    #  'POSCO',
+    #  'SK바이오사이언스',
+    #  '엔씨소프트',
+    #  '두산중공업',
+    #  'HMM',
+    #  '아시아나항공',
+    #  '한화솔루션',
+    #  '신세계',
+    #  '에스엠',
+    #  '유한양행',
+    #  '카카오게임즈',
+    #  'SK하이닉스',
+    #  '셀트리온',
+    #  '현대모비스']
+    # 신문사 = {'1011':'서울경제','1018':'이데일리', '1014':'파이낸셜뉴스'}
+    
+    # 아래 예시(첫 줄)는 최신순 정렬 / 서울경제 신문사 / 삼성전자 검색 url
+    urls = [
+        "https://search.naver.com/search.naver?where=news&query=삼성전자&sm=tab_opt&sort=1&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=1&office_type=1&office_section_code=3&news_office_checked=1011&nso=so%3Add%2Cp%3Aall&is_sug_officeid=0",
+        # "https://search.naver.com/search.naver?where=news&query=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&sm=tab_opt&sort=1&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=1&office_type=1&office_section_code=3&news_office_checked=1018&nso=so%3Add%2Cp%3Aall&is_sug_officeid=0",
+        # "https://search.naver.com/search.naver?where=news&query=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&sm=tab_opt&sort=1&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=1&office_type=1&office_section_code=3&news_office_checked=1014&nso=so%3Add%2Cp%3Aall&is_sug_officeid=0",
     ]
 
     def parse(self, response):
