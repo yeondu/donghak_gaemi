@@ -10,7 +10,7 @@ import json
 
 
 # JsonLine 파일로 저장하는 클래스
-class JsonWriterPipeline:
+class CrawlerPipeline:
     def open_spider(self, spider):
         self.file = open('seoul-eco.jl', 'a')
 
