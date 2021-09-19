@@ -6,7 +6,7 @@ from ..items import Item
 
 class NewsSpider(scrapy.Spider):
     name = "news"
-    # 삼성전자
+    # 삼성전자 / 서울 경제
     start_urls = [
         "https://search.naver.com/search.naver?sm=tab_hty.top&where=news&query=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&oquery=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&tqi=hRk%2B6sp0JXossA4t7VossssstxZ-291757&nso=so%3Ar%2Cp%3Aall%2Ca%3Aall&mynews=1&news_office_checked=1011&office_section_code=3&office_type=1&pd=0&photo=0&sort=0"
     ]
