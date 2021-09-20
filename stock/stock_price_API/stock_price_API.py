@@ -23,7 +23,7 @@ code = ["A035420", "A005930", "A090430", "A005380", "A051910", "A035720", "A0054
 
 value = []
 
-f = open('stockprice_data.csv', 'w')
+f = open('stockprice_data.csv', 'w', encoding='UTF-8')
 
 # col 이름 지정
 f.write("%s,%s,%s,%s,%s,%s,%s,%s,%s\n" % ('stock_id', 'stock_name', 'stock_code', 'date', 'open', 'high', 'low', 'close', 'volume'))
