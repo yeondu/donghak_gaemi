@@ -19,7 +19,6 @@ class priceModel(models.Model):
     high = models.FloatField(null = False, blank = False)
     low = models.FloatField(null = False, blank = False)
     close = models.FloatField(null = False, blank = False)
-    adj_close = models.FloatField(null = False, blank = False)
     volume = models.IntegerField(null = False, blank = False)
     stock_code = models.ForeignKey(stockModel, on_delete = models.CASCADE, db_column = 'stock_code')
 
