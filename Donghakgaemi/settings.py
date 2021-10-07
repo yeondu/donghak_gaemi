@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'Donghakgaemi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stock',
-        'USER': 'gaemi',
-        'PASSWORD': 'skdmlqlqjs87!',
-        'HOST': 'localhost',
+        'NAME': 'Donghakgaemi',
+        'USER': 'donghakgaemi',
+        'PASSWORD': 'donghakmysql1',
+        'HOST': '3.35.67.232',
         'PORT': '3306',
     }
 }
