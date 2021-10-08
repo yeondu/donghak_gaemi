@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'Donghakgaemi',
         'USER': 'donghakgaemi',
         'PASSWORD': 'donghakmysql1',
-        'HOST': '3.35.67.232',
+        'HOST': '15.165.31.148',
         'PORT': '3306',
     }
 }
