@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-e2%_pv!^hg9t11-umv9j@z$4&ft439)!pnka39au=#-4y1#e+$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['15.165.31.148']
 
 
 # Application definition
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'Donghakgaemi',
         'USER': 'donghakgaemi',
         'PASSWORD': 'donghakmysql1',
-        'HOST': '3.35.67.232',
+        'HOST': '15.165.31.148',
         'PORT': '3306',
     }
 }
