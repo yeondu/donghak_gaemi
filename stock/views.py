@@ -4,8 +4,10 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView, TemplateView
 from django.views.generic import View
 from time import mktime, strptime
-from stock.models import stockModel, priceModel, predictModel, accuracyModel
+from stock.models import stockModel, priceModel, predictModel, accuracyModel, newsModel, sentimentModel
 from django.core.paginator import Paginator
+
+
 # Create your views here.
 
 # 종목 리스트
@@ -18,7 +20,7 @@ def home(request):
         price_id = priceModel.objects.filter(stock_code = code['stock_code']).order_by('-date').values('stock_id')[0] # 주가 아이디
         close = priceModel.objects.filter(stock_code = code['stock_code']).order_by('-date').values('close')[0]
         before = priceModel.objects.filter(stock_code = code['stock_code']).order_by('-date').values('close')[1]
-        fluc = (close['close'] - before['close'])/close['close']
+        fluc = round(((close['close'] - before['close'])/close['close']), 2)
         fluction = {'fluction':fluc}
         predict = predictModel.objects.filter(stock_id = price_id['stock_id']).values('result')[0]
         accuracy = accuracyModel.objects.filter(stock_code = code['stock_code']).order_by('-model_id').values('accuracy')[0]
@@ -35,10 +37,38 @@ def home(request):
 
 # 종목 상세페이지(뉴스)
 def detail_stock_news(request, id):
-    price = priceModel.objects.get(stock_id = id)
-    stock = price.stock_code
+    close = priceModel.objects.get(stock_id = id)
+    before = priceModel.objects.filter(stock_code = close.stock_code).order_by('-date').values('close')[1]
+    diff = (close.close - before['close'])
+    difference = {'difference': diff}
+    fluc = round((close.close - before['close']) / close.close,2)
+    fluction = {'fluction': fluc}
+    stock = close.stock_code
+
+    # 뉴스
+    news_id = newsModel.objects.filter(stock_code = close.stock_code).order_by('-registration_date').values('news_id')
+    news_list = []
+    for n in news_id:
+        news_press = newsModel.objects.filter(news_id = n['news_id']).values('press')[0]
+        news_link = newsModel.objects.filter(news_id = n['news_id']).values('link')[0]
+        news_title = newsModel.objects.filter(news_id = n['news_id']).values('title')[0]
+        result = sentimentModel.objects.filter(news_id = n['news_id']).values('result')[0]
+        list = {**news_press, **news_link, **news_title, **result}
+        news_list.append(list)
+
+    MAX_LIST_CNT = 6
+    page = request.GET.get('page', 1)  # page 번호를 get 파라미터로 받고 없으면 기본값 1로 설정
+    list = news_list
+    paginator = Paginator(news_list, MAX_LIST_CNT)
+    page_obj = paginator.get_page(page)
+    price = {'close':close,
+             'difference':difference,
+             'fluction':fluction,
+             'stock':stock,
+             'page':page_obj}
     #stock = stockModel.objects.filter(stock_code = price['stock_code_id']).values()
-    return render(request, 'stock/detail.html', {'price':price, 'stock':stock})
+    return render(request, 'stock/detail.html', price)
+
 
 
 

@@ -15,10 +15,10 @@ class priceModel(models.Model):
 
     stock_id = models.IntegerField(primary_key=True, null=False, blank=False, db_column = 'stock_id')
     date = models.DateField(null = False, blank = False)
-    open = models.FloatField(null = False, blank = False)
-    high = models.FloatField(null = False, blank = False)
-    low = models.FloatField(null = False, blank = False)
-    close = models.FloatField(null = False, blank = False)
+    open = models.IntegerField(null = False, blank = False)
+    high = models.IntegerField(null = False, blank = False)
+    low = models.IntegerField(null = False, blank = False)
+    close = models.IntegerField(null = False, blank = False)
     volume = models.IntegerField(null = False, blank = False)
     stock_code = models.ForeignKey(stockModel, on_delete = models.CASCADE, db_column = 'stock_code')
 
@@ -47,10 +47,10 @@ class newsModel(models.Model):
     title = models.CharField(max_length = 100, null = False, blank = False)
     content = models.TextField(max_length = 20000, null = False, blank = False)
     summary = models.CharField(max_length = 500, null = False, blank = False)
-    registrant = models.CharField(max_length = 18, null = False, blank = False)
-    press = models.CharField(max_length = 18, null = False, blank = False)
-    registration_date = models.DateField(null = False, blank = False)
-    link = models.CharField(max_length = 100, null = False, blank = False)
+    registrant = models.CharField(max_length = 18, null = False, blank = False) # 등록자(기자)
+    press = models.CharField(max_length = 18, null = False, blank = False) # 언론사
+    registration_date = models.DateField(null = False, blank = False) # 등록 날짜
+    link = models.CharField(max_length = 200, null = False, blank = False) # 링크
     stock_code = models.ForeignKey(stockModel, on_delete=models.CASCADE, db_column='stock_code')
 
 
