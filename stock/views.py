@@ -6,6 +6,8 @@ from django.views.generic import View
 from time import mktime, strptime
 from stock.models import stockModel, priceModel, predictModel, accuracyModel, newsModel, sentimentModel
 from django.core.paginator import Paginator
+
+
 # Create your views here.
 
 # 종목 리스트
@@ -39,21 +41,34 @@ def detail_stock_news(request, id):
     before = priceModel.objects.filter(stock_code = close.stock_code).order_by('-date').values('close')[1]
     diff = (close.close - before['close'])
     difference = {'difference': diff}
-    fluc = (close.close - before['close']) / close.close
+    fluc = round((close.close - before['close']) / close.close,2)
     fluction = {'fluction': fluc}
     stock = close.stock_code
 
     # 뉴스
-    news = newsModel.objects.get(stock_code = close.stock_code).order_by('-registration_date')
-    sentiment = news.news_id
+    news_id = newsModel.objects.filter(stock_code = close.stock_code).order_by('-registration_date').values('news_id')
+    news_list = []
+    for n in news_id:
+        news_press = newsModel.objects.filter(news_id = n['news_id']).values('press')[0]
+        news_link = newsModel.objects.filter(news_id = n['news_id']).values('link')[0]
+        news_title = newsModel.objects.filter(news_id = n['news_id']).values('title')[0]
+        result = sentimentModel.objects.filter(news_id = n['news_id']).values('result')[0]
+        list = {**news_press, **news_link, **news_title, **result}
+        news_list.append(list)
+
+    MAX_LIST_CNT = 6
+    page = request.GET.get('page', 1)  # page 번호를 get 파라미터로 받고 없으면 기본값 1로 설정
+    list = news_list
+    paginator = Paginator(news_list, MAX_LIST_CNT)
+    page_obj = paginator.get_page(page)
     price = {'close':close,
              'difference':difference,
              'fluction':fluction,
              'stock':stock,
-             'news':news,
-             'sentiment':sentiment}
+             'page':page_obj}
     #stock = stockModel.objects.filter(stock_code = price['stock_code_id']).values()
     return render(request, 'stock/detail.html', price)
+
 
 
 
