@@ -32,7 +32,7 @@ def getLinks(urls, includeUrl):
         # 내부 링크
         for link in bs.find_all('a'):
             if link is not None:
-                if (link.attrs['href'].startswith(includeUrl)):
+                if link.attrs['href'].startswith(includeUrl):
                     if link not in internalLinks:
                         url = 'https://finance.naver.com/' + link.attrs['href']
                         internalLinks.append(url)
@@ -55,11 +55,8 @@ def crawl_news(stockcode, internalLinks):
             # 제목
             title = bs.tbody.find('th').text
 
-            # 신문사
-            newspaper = bs.tbody.findAll('th')[1].span.text.split('  ')[0]
-
-            # 날짜 시간
-            datetime = bs.tbody.findAll('th')[1].span.text.split('  ')[1]
+            # 신문사, 날짜 시간
+            newspaper, datetime = bs.tbody.findAll('th')[1].span.text.split('  ')
 
             # 기사 내용
             content = bs.find('div', {'id': 'news_read'})
@@ -94,7 +91,7 @@ def crawl_news_to_db(stockcode='005930'):
 
     db = client.donghakgaemi
 
-    df = pd.DataFrame(news, columns=['stockcode', 'datetime', 'title', ' newspaper', 'content', 'link'])
+    df = pd.DataFrame(news, columns=['title', 'newspaper', 'datetime', 'content', 'stockcode', 'link'])
 
     df.to_csv(stockcode + '.csv', index=False)
     docs = df.to_dict("records")
