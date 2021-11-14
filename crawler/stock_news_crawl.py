@@ -76,13 +76,13 @@ def crawl_news(stockcode, internalLinks):
 
 from pymongo import MongoClient
 
-def crawl_news_to_db(stockcode='005930'):
-    url = 'https://finance.naver.com/item/news_news.naver?code=005930&page=&sm=title_entity_id.basic&clusterId='
+def crawl_news_to_db(stockcode):
+    url = 'https://finance.naver.com/item/news_news.naver?code='+stockcode+'&page=&sm=title_entity_id.basic&clusterId='
     html = urlopen(url)
     bs = BeautifulSoup(html.read(), 'html.parser')
     includeUrl = '/item/news_read.naver?article_id'
 
-    urls = getUrl(bs, stockcode='005930')
+    urls = getUrl(bs, stockcode)
     internalLinks = getLinks(urls, includeUrl)
     news = crawl_news(stockcode, internalLinks)
 
