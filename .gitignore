@@ -129,6 +129,7 @@ venv.bak/
 # IntelliJ
 .idea
 *.iml
+*.xml
 
 # Spyder project settings
 .spyderproject
