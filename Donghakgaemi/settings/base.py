@@ -104,7 +104,7 @@ DATABASES = {
     'news':{
         'ENGINE':'djongo',
         'NAME':'donghakgaemi',
-        'ENFORCE_SCHEMA': True,
+        'ENFORCE_SCHEMA': False,
         'LOGGING': {
             'version': 1,
             'loggers': {
@@ -115,12 +115,12 @@ DATABASES = {
             },
         },
         'CLIENT': {
-        'USER':'donghakgaemi',
-        'PASSWORD':'donghakmongo1',
-        'HOST':'15.165.31.148',
-        'PORT':'27017',
-        'authSource': 'admin',
-        'authMechanism': 'SCRAM-SHA-1'
+            'host': '15.165.31.148',
+            'port': 27017,
+            'username': 'donghakgaemi',
+            'password': 'donghakmongo1',
+            'authSource': 'admin',
+            'authMechanism': 'SCRAM-SHA-1'
         }
     }
 }

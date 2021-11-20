@@ -75,7 +75,8 @@ class sentimentModel(models.Model):
 
 
 from djongo import models as mgmodels
-class newsModel(mgmodels.Model):
+
+class mongonewsModel(mgmodels.Model):
     class Meta:
         managed = False,
         app_label = "news"
