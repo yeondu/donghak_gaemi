@@ -74,7 +74,7 @@ class sentimentModel(models.Model):
     result = models.IntegerField(null = False, blank = False)
 
 
-from django import models as mgmodels
+from djongo import models as mgmodels
 class newsModel(mgmodels.Model):
     class Meta:
         managed = False,

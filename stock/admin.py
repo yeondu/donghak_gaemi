@@ -4,5 +4,5 @@ from .models import priceModel
 admin.site.register(stockModel)
 admin.site.register(priceModel)
 
-from .model import newsModel
-admin.stie.register(newsModel)
+from .models import newsModel
+admin.site.register(newsModel)
