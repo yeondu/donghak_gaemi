@@ -2,6 +2,8 @@ from django.db import models
 class stockModel(models.Model):
     class Meta:
         db_table = "stock"
+        managed = False,
+        app_label = "default"
 
     stock_name = models.CharField(max_length=20, null=False, blank=False)
     stock_code = models.CharField(primary_key = True, max_length = 10, null=False, blank=False)
@@ -12,6 +14,8 @@ class stockModel(models.Model):
 class priceModel(models.Model):
     class Meta:
         db_table = "price"
+        managed = False,
+        app_label = "default"
 
     stock_id = models.IntegerField(primary_key=True, null=False, blank=False, db_column = 'stock_id')
     date = models.DateField(null = False, blank = False)
@@ -25,6 +29,8 @@ class priceModel(models.Model):
 class accuracyModel(models.Model):
     class Meta:
         db_table = "accuracy"
+        managed = False,
+        app_label = "default"
 
     model_id = models.IntegerField(primary_key=True, null=False, blank=False, db_column='model_id')
     accuracy = models.IntegerField(null=False, blank = False)
@@ -34,6 +40,8 @@ class accuracyModel(models.Model):
 class predictModel(models.Model):
     class Meta:
         db_table = "predict"
+        managed = False,
+        app_label = "default"
 
     model_id = models.ForeignKey(accuracyModel, on_delete=models.CASCADE, db_column = 'model_id')
     stock_id = models.ForeignKey(priceModel, on_delete=models.CASCADE, db_column = 'stock_id')
@@ -42,6 +50,8 @@ class predictModel(models.Model):
 class newsModel(models.Model):
     class Meta:
         db_table = "news"
+        managed = False,
+        app_label = "default"
 
     news_id = models.IntegerField(primary_key = True, null = False, blank = False, db_column='news_id')
     title = models.CharField(max_length = 100, null = False, blank = False)
@@ -57,8 +67,25 @@ class newsModel(models.Model):
 class sentimentModel(models.Model):
     class Meta:
         db_table = "sentiment"
+        managed = False,
+        app_label = "default"
 
     news_id = models.ForeignKey(newsModel, on_delete=models.CASCADE, db_column='news_id')
     result = models.IntegerField(null = False, blank = False)
 
 
+from django import models as mgmodels
+class newsModel(mgmodels.Model):
+    class Meta:
+        managed = False,
+        app_label = "news"
+
+    title = mgmodels.CharField(max_length=100),
+    newspaper = mgmodels.CharField(max_length=50),
+    datetime = mgmodels.DateField(),
+    content = mgmodels.CharField(max_length=20000),
+    stock_code = mgmodels.CharField(),
+    link = mgmodels.CharField(max_length=500),
+    pos = mgmodels.IntegerField(),
+    neg = mgmodels.IntegerField(),
+    result = mgmodels.IntegerField()
