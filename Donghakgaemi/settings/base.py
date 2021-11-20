@@ -84,16 +84,47 @@ WSGI_APPLICATION = 'Donghakgaemi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+# database router
+DATABASE_ROUTERS = [
+    'stock.router.Router',
+]
+
+# database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        # 'ENGINE' : 'mysql.connector.django', # mysql-connector-python 8.0.26
         'NAME': 'Donghakgaemi',
         'USER': 'donghakgaemi',
         'PASSWORD': 'donghakmysql1',
         'HOST': '15.165.31.148',
         'PORT': '3306',
+    },
+    'news':{
+        'ENGINE':'djongo',
+        'NAME':'donghakgaemi',
+        'ENFORCE_SCHEMA': True,
+        'LOGGING': {
+            'version': 1,
+            'loggers': {
+                'djongo': {
+                    'level': 'DEBUG',
+                    'propogate': False,
+                }
+            },
+        },
+        'CLIENT': {
+        'USER':'donghakgaemi',
+        'PASSWORD':'donghakmongo1',
+        'HOST':'15.165.31.148',
+        'PORT':'27017',
+        'authSource': 'admin',
+        'authMechanism': 'SCRAM-SHA-1'
+        }
     }
 }
+
 
 
 # Password validation
