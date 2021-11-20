@@ -3,3 +3,6 @@ from .models import stockModel
 from .models import priceModel
 admin.site.register(stockModel)
 admin.site.register(priceModel)
+
+from .model import newsModel
+admin.stie.register(newsModel)
