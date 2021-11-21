@@ -29,15 +29,20 @@ def tokenizing(text):
     except AttributeError:
         pass
 
-DONGHAK = pd.read_csv('dic/DONGHAK.txt',engine="python",header=None,sep="\t",encoding='cp949')
-DONGHAK.columns=['word','sent','score']
-DONGHAK=DONGHAK.reset_index(drop=True)
-DONGHAK.set_index(['word'],inplace=True)
 
-def pos_scoring(tokens_list):
+pos_dic = ('상승','급등','실적','매수의견','강화','확대','규모','무상증자','유상감자','자사주','수혜',\
+           '고배당','신제품','개발','취득','신고가','최초','추천','실적개선','리포트','액면분할','병합',\
+           '추진','신규','테마','매수세','성장세','증가','기대','호실적','깜짝실적','고속 성장','최대',\
+           '최대치','호조','신사업 호조','서프라이즈','쾌조','최고','최고실적','줄상향','상향','장미빛',\
+           '흑자','오를','오르다','긍정적','경영권분쟁','기대감','강세')
+
+neg_dic = ('적자','검찰 조사','임금체불','적발','미지급','위반','논란','약세','좌절','하락','부정적',\
+           '유상증자','무상감자','순삭','관리종목','감사의견','불성실','불성실공시','실적악화','악화',\
+           '규제','소송','횡령','환율이슈','고점매도','회피','매도세','재무부담','우려','부담','분통','지적','급락','감소','떨어졌')
+
+def pos_scoring(tokens_list, sent_dic):
     try:
-        sent_dic = DONGHAK[DONGHAK['sent']=='positive']
-        match_word = [x for x in tokens_list if x in sent_dic.index]
+        match_word = [x for x in tokens_list if x in sent_dic]
 
         score = len(match_word)
 
@@ -45,10 +50,9 @@ def pos_scoring(tokens_list):
     except TypeError:
         pass
 
-def neg_scoring(tokens_list):
+def neg_scoring(tokens_list, sent_dic):
     try:
-        sent_dic = DONGHAK[DONGHAK['sent']=='negative']
-        match_word = [x for x in tokens_list if x in sent_dic.index]
+        match_word = [x for x in tokens_list if x in sent_dic]
 
         score = len(match_word) * -1
 
@@ -73,7 +77,8 @@ def tagging(sent):
 #text = '상승할 가능성이 높다. 장미빛 미래가 있다. 하락하지 않는다. 하락'
 #text = cleansing(text)
 #tokens_list = tokenizing(text)
-#print('부정 감성 지수',neg_scoring(tokens_list))
-#print('긍정 감성 지수', pos_scoring(tokens_list))
-#sent  = neg_scoring(tokens_list) + pos_scoring(tokens_list)
+#print('부정 감성 지수',neg_scoring(tokens_list, pos_dic))
+#print('긍정 감성 지수', pos_scoring(tokens_list, neg_dic))
+#sent  = neg_scoring(tokens_list, pos_dic) + pos_scoring(tokens_list, neg_dic)
 #print('종합 분석 의견', tagging(sent))
+
