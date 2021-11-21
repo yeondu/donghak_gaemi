@@ -102,13 +102,13 @@ DATABASES = {
         'PORT': '3306',
     },
     'news':{
-        'ENGINE':'djongo',
+        'ENGINE':'django',
         'NAME':'donghakgaemi',
         'ENFORCE_SCHEMA': False,
         'LOGGING': {
             'version': 1,
             'loggers': {
-                'djongo': {
+                'django': {
                     'level': 'DEBUG',
                     'propogate': False,
                 }
