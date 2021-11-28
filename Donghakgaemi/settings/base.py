@@ -14,7 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+file = '/home/ubuntu/donghak_gaemi/Donghakgaemi/settings/base.py'
+BASE_DIR = Path(file).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-e2%_pv!^hg9t11-umv9j@z$4&ft439)!pnka39au=#-4y1#e+$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['15.165.31.148']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,42 +87,20 @@ WSGI_APPLICATION = 'Donghakgaemi.wsgi.application'
 
 
 # database router
-DATABASE_ROUTERS = [
-    'stock.router.Router',
-]
+#DATABASE_ROUTERS = [
+#    'stock.router.Router',
+#]
 
 # database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        # 'ENGINE' : 'mysql.connector.django', # mysql-connector-python 8.0.26
+        #'ENGINE': 'django.db.backends.mysql',
+         'ENGINE' : 'mysql.connector.django', # mysql-connector-python 8.0.26
         'NAME': 'Donghakgaemi',
         'USER': 'donghakgaemi',
         'PASSWORD': 'donghakmysql1',
         'HOST': '15.165.31.148',
         'PORT': '3306',
-    },
-    'news':{
-        'ENGINE':'djongo',
-        'NAME':'donghakgaemi',
-        'ENFORCE_SCHEMA': False,
-        'LOGGING': {
-            'version': 1,
-            'loggers': {
-                'djongo': {
-                    'level': 'DEBUG',
-                    'propogate': False,
-                }
-            },
-        },
-        'CLIENT': {
-            'host': '15.165.31.148',
-            'port': 27017,
-            'username': 'donghakgaemi',
-            'password': 'donghakmongo1',
-            'authSource': 'admin',
-            'authMechanism': 'SCRAM-SHA-1'
-        }
     }
 }
 
@@ -158,6 +137,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
