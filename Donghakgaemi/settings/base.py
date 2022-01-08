@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'Donghakgaemi.wsgi.application'
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.mysql',
-         'ENGINE' : 'mysql.connector.django', # mysql-connector-python 8.0.26
+         'ENGINE' : 'django.db.backends.mysql', # mysql-connector-python 8.0.26
         'NAME': 'Donghakgaemi',
-        'USER': 'donghakgaemi',
-        'PASSWORD': 'donghakmysql1',
-        'HOST': '15.165.31.148',
+        'USER': 'root',
+        'PASSWORD': 'skdmlqlqjs87!',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
